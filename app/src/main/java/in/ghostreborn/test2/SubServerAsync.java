@@ -58,7 +58,7 @@ public class SubServerAsync extends AsyncTask<Void, Void, ArrayList<String>> {
 
         Button button = new Button(context);
         button.setText("Download TS");
-        button.setOnClickListener(view -> Log.e("ANIME_SERVER", Constants.subServers.get(0)));
+        button.setOnClickListener(view -> new DownloadAsync().execute());
         MainActivity.testLinearLayout.addView(button);
 
     }
