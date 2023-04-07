@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         testText = findViewById(R.id.test_text);
         testLinearLayout = findViewById(R.id.linear_layout);
-        new MainServerAsync().execute();
+        new MainServerAsync(MainActivity.this).execute();
 
     }
 

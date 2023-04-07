@@ -1,6 +1,10 @@
 package in.ghostreborn.test2;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,6 +18,11 @@ import java.util.ArrayList;
 public class MainServerAsync extends AsyncTask<Void, Void, ArrayList<String>> {
 
     ArrayList<String> servers = new ArrayList<>();
+    Context context;
+
+    public MainServerAsync(Context context){
+        this.context = context;
+    }
 
     @Override
     protected ArrayList<String> doInBackground(Void... voids) {
@@ -47,5 +56,14 @@ public class MainServerAsync extends AsyncTask<Void, Void, ArrayList<String>> {
         }
 
         Constants.animeServers = test;
+
+        Button button = new Button(context);
+        button.setText("SERVER 1");
+        button.setOnClickListener(view -> {
+            Log.e("TAG", "SERVER: " + Constants.animeServers.get(0));
+        });
+
+        MainActivity.testLinearLayout.addView(button);
+
     }
 }
