@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setData(){
         Constants.animeServers = new ArrayList<>();
+        Constants.subServers = new ArrayList<>();
     }
 
 }

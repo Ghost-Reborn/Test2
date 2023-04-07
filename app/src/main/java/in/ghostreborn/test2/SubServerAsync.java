@@ -15,27 +15,25 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class MainServerAsync extends AsyncTask<Void, Void, ArrayList<String>> {
+public class SubServerAsync extends AsyncTask<Void, Void, ArrayList<String>> {
 
-    ArrayList<String> servers = new ArrayList<>();
     Context context;
-
-    public MainServerAsync(Context context){
+    public SubServerAsync(Context context){
         this.context = context;
     }
 
     @Override
     protected ArrayList<String> doInBackground(Void... voids) {
-        try{
-            URL url = new URL(Constants.HLS_URL);
+        try {
+            URL url = new URL(Constants.animeServers.get(0));
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             InputStream inputStream = connection.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String line = "";
             while ((line = reader.readLine()) != null) {
-                servers.add(line);
+                Constants.subServers.add(line);
             }
-            return servers;
+            return Constants.subServers;
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -44,25 +42,23 @@ public class MainServerAsync extends AsyncTask<Void, Void, ArrayList<String>> {
     }
 
     @Override
-    protected void onPostExecute(ArrayList<String> test) {
-        super.onPostExecute(test);
-        MainActivity.testText.setText("");
+    protected void onPostExecute(ArrayList<String> strings) {
+        super.onPostExecute(strings);
 
-        int i=0;
-        test.remove(0);
-        while (i<test.size()){
-            test.remove(i);
+        Constants.subServers.remove(0);
+        Constants.subServers.remove(0);
+        Constants.subServers.remove(0);
+        Constants.subServers.remove(0);
+
+        int i = 0;
+        while (i < strings.size()) {
+            Constants.subServers.remove(i);
             i++;
         }
 
-        Constants.animeServers = test;
-
         Button button = new Button(context);
-        button.setText("SERVER 1");
-        button.setOnClickListener(view -> {
-            new SubServerAsync(context).execute();
-        });
-
+        button.setText("Download TS");
+        button.setOnClickListener(view -> Log.e("ANIME_SERVER", Constants.subServers.get(0)));
         MainActivity.testLinearLayout.addView(button);
 
     }
