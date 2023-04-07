@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     public static TextView testText;
+    public static LinearLayout testLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setData();
 
         testText = findViewById(R.id.test_text);
+        testLinearLayout = findViewById(R.id.linear_layout);
         new MainServerAsync().execute();
 
     }
