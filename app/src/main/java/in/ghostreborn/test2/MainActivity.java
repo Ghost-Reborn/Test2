@@ -11,8 +11,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static TextView testText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         checkPermissions();
+        setData();
+
+        testText = findViewById(R.id.test_text);
+        new MainServerAsync().execute();
 
     }
 
@@ -38,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, permissions, 1);
             }
         }
+    }
+
+    private void setData(){
+        Constants.animeServers = new ArrayList<>();
     }
 
 }
